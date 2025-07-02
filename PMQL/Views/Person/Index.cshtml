@@ -1,0 +1,24 @@
+@model PMQL.Models.Person
+
+<h2>Nhập thông tin Person</h2>
+
+<form asp-action="Index" method="post">
+    <div>
+        <label>Mã:</label>
+        <input type="text" name="PersonId" />
+    </div>
+    <div>
+        <label>Họ tên:</label>
+        <input type="text" name="FullName" />
+    </div>
+    <div>
+        <label>Địa chỉ:</label>
+        <input type="text" name="Address" />
+    </div>
+    <button type="submit">Gửi dữ liệu</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <h3 style="color:green">@ViewBag.Message</h3>
+}
