@@ -1,0 +1,19 @@
+@model PMQL.Models.Person
+
+<h2>Thêm mới Person</h2>
+
+<form asp-action="Create">
+    <div>
+        <label>Mã:</label>
+        <input asp-for="PersonId" />
+    </div>
+    <div>
+        <label>Họ tên:</label>
+        <input asp-for="FullName" />
+    </div>
+    <div>
+        <label>Địa chỉ:</label>
+        <input asp-for="Address" />
+    </div>
+    <button type="submit">Lưu</button>
+</form>

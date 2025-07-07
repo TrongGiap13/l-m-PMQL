@@ -1,0 +1,16 @@
+@model PMQL.Models.Person
+
+<h2>Sửa thông tin Person</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="PersonId" />
+    <div>
+        <label>Họ tên:</label>
+        <input asp-for="FullName" />
+    </div>
+    <div>
+        <label>Địa chỉ:</label>
+        <input asp-for="Address" />
+    </div>
+    <button type="submit">Cập nhật</button>
+</form>

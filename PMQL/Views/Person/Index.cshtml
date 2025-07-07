@@ -1,24 +1,28 @@
-@model PMQL.Models.Person
+@model IEnumerable<PMQL.Models.Person>
 
-<h2>Nhập thông tin Person</h2>
+<h2>Danh sách Person</h2>
 
-<form asp-action="Index" method="post">
-    <div>
-        <label>Mã:</label>
-        <input type="text" name="PersonId" />
-    </div>
-    <div>
-        <label>Họ tên:</label>
-        <input type="text" name="FullName" />
-    </div>
-    <div>
-        <label>Địa chỉ:</label>
-        <input type="text" name="Address" />
-    </div>
-    <button type="submit">Gửi dữ liệu</button>
-</form>
+<p>
+    <a asp-action="Create">Thêm mới</a>
+</p>
 
-@if (ViewBag.Message != null)
-{
-    <h3 style="color:green">@ViewBag.Message</h3>
-}
+<table border="1">
+    <tr>
+        <th>Mã</th>
+        <th>Họ tên</th>
+        <th>Địa chỉ</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.PersonId</td>
+            <td>@item.FullName</td>
+            <td>@item.Address</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PersonId">Sửa</a> |
+                <a asp-action="Delete" asp-route-id="@item.PersonId">Xóa</a>
+            </td>
+        </tr>
+    }
+</table>
