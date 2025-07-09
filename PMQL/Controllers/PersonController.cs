@@ -5,14 +5,10 @@ using PMQL.Models;
 
 namespace PMQL.Controllers
 {
-    public class PersonController : Controller
+    public class PersonController(ApplicationDbContext context, AutoGenerateCode autoGenerateCode) : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public PersonController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly AutoGenerateCode _autoGenerateCode = autoGenerateCode;
 
         // GET: /Person
         public async Task<IActionResult> Index()
@@ -23,6 +19,16 @@ namespace PMQL.Controllers
         // GET: /Person/Create
         public IActionResult Create()
         {
+            // sinh ma Person ID tu dong 
+            // 1. Lay ra ban ghi cuoi cung trong co so du lieu 
+            var lastPerson = context.Person
+            .OrderByDescending(s => s.PersonId)
+            .FirstOrDefault();
+            // 2. Lay Person ID cua ban ghi cyuoi cung 
+            var PersonId = lastPerson?.PersonId ?? "STD000";
+            // 3. Goi den phuong thuc GenerateCode de sinh ma moi
+            var newPersonId = _autoGenerateCode.GenerateCode(PersonId);
+            ViewBag.newPersonId = newPersonId; // Pass the new ID to the view 
             return View();
         }
 
